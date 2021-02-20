@@ -10,11 +10,17 @@ import (
 // Driver contains all the data and methods for a chrome driver
 type Driver struct {
 	driver goselenium.WebDriver
+	cmd    exec.Cmd
 }
 
 // Close closes the session
-func (d *Driver) Close() {
-	d.driver.DeleteSession()
+func (d *Driver) Close() error {
+	_, err := d.driver.DeleteSession()
+	if err != nil {
+		return err
+	}
+	err = d.cmd.Process.Kill()
+	return err
 }
 
 // CreateDriver starts a driver and sets up the session
