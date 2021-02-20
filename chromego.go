@@ -2,7 +2,6 @@ package chromego
 
 import (
 	"os/exec"
-	"path/filepath"
 	"strconv"
 
 	goselenium "github.com/bunsenapp/go-selenium"
@@ -23,11 +22,8 @@ func CreateDriver(chromedriverpath string, port int) (Driver, error) {
 	prt := strconv.Itoa(port)
 
 	// Start driver
-	cmd := &exec.Cmd{
-		Path: filepath.Dir(chromedriverpath),
-		Args: []string{chromedriverpath, "--port=" + prt, "&"},
-	}
-	if err := cmd.Run(); err != nil {
+	cmd := exec.Command(chromedriverpath, "--port="+prt)
+	if err := cmd.Start(); err != nil {
 		return Driver{}, err
 	}
 
