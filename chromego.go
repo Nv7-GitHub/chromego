@@ -10,7 +10,7 @@ import (
 // Driver contains all the data and methods for a chrome driver
 type Driver struct {
 	driver goselenium.WebDriver
-	cmd    exec.Cmd
+	cmd    *exec.Cmd
 }
 
 // Close closes the session
@@ -46,6 +46,7 @@ func CreateDriver(chromedriverpath string, port int) (Driver, error) {
 
 	drv := Driver{
 		driver: driver,
+		cmd:    cmd,
 	}
 	return drv, nil
 }
