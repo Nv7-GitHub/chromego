@@ -4,5 +4,11 @@ package chromego
 
 // URL gets the driver's current URL
 func (d *Driver) URL() string {
-	return d.URL()
+	return d.driver.DriverURL()
+}
+
+// Refresh refreshes the driver
+func (d *Driver) Refresh() error {
+	_, err := d.driver.Refresh()
+	return err
 }
