@@ -67,3 +67,63 @@ func (d *Driver) FindByXPath(xpath string) (Element, error) {
 		el: el,
 	}, nil
 }
+
+// FindElemsByCSSSelector finds elements by a css selector
+func (d *Driver) FindElemsByCSSSelector(selector string) ([]Element, error) {
+	els, err := d.driver.FindElements(goselenium.ByCSSSelector(selector))
+	if err != nil {
+		return []Element{}, err
+	}
+	elems := make([]Element, len(els))
+	for i, val := range els {
+		elems[i] = Element{
+			el: val,
+		}
+	}
+	return elems, nil
+}
+
+// FindElemsByLinkText finds links by their text
+func (d *Driver) FindElemsByLinkText(text string) ([]Element, error) {
+	els, err := d.driver.FindElements(goselenium.ByLinkText(text))
+	if err != nil {
+		return []Element{}, err
+	}
+	elems := make([]Element, len(els))
+	for i, val := range els {
+		elems[i] = Element{
+			el: val,
+		}
+	}
+	return elems, nil
+}
+
+// FindElemsByPartialLinkText finds a links by part of their text
+func (d *Driver) FindElemsByPartialLinkText(partialText string) ([]Element, error) {
+	els, err := d.driver.FindElements(goselenium.ByPartialLinkText(partialText))
+	if err != nil {
+		return []Element{}, err
+	}
+	elems := make([]Element, len(els))
+	for i, val := range els {
+		elems[i] = Element{
+			el: val,
+		}
+	}
+	return elems, nil
+}
+
+// FindElemsByXPath finds elements by their XPath
+func (d *Driver) FindElemsByXPath(xpath string) ([]Element, error) {
+	els, err := d.driver.FindElements(goselenium.ByXPath(xpath))
+	if err != nil {
+		return []Element{}, err
+	}
+	elems := make([]Element, len(els))
+	for i, val := range els {
+		elems[i] = Element{
+			el: val,
+		}
+	}
+	return elems, nil
+}
