@@ -59,6 +59,15 @@ func (e *Element) Tag() (string, error) {
 	return resp.Tag, nil
 }
 
+// Text gets an element's innertext
+func (e *Element) Text() (string, error) {
+	resp, err := e.el.Text()
+	if err != nil {
+		return "", err
+	}
+	return resp.Text, nil
+}
+
 // CSSAttr gets an element's css attribute
 func (e *Element) CSSAttr(attribute string) (string, error) {
 	resp, err := e.el.CSSValue(attribute)
