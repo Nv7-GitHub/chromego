@@ -40,3 +40,9 @@ func (d *Driver) Screenshot() (image.Image, error) {
 	im, err := png.Decode(r)
 	return im, err
 }
+
+// Size returns the x, y size of the window
+func (d *Driver) Size() (int, int, error) {
+	sz, err := d.driver.WindowSize()
+	return int(sz.Dimensions.Width), int(sz.Dimensions.Height), err
+}
